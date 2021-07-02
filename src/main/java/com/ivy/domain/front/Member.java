@@ -20,6 +20,22 @@ public class Member {
     private Date registerDate;
     private String state;
 
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id='" + id + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", password='" + password + '\'' +
+                ", birthday=" + birthday +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", address='" + address + '\'' +
+                ", registerDate=" + registerDate +
+                ", state='" + state + '\'' +
+                '}';
+    }
+
     public String getId() {
         return id;
     }

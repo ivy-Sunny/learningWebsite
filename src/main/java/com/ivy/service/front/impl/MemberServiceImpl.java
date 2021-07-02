@@ -18,9 +18,25 @@ import java.util.UUID;
  * @CreateTime: 2021-07-01
  */
 public class MemberServiceImpl implements MemberService {
+    public Member login(String email, String password) {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = MapperFactory.getSqlSession();
+            MemberDao memberDao = MapperFactory.getMapper(sqlSession, MemberDao.class);
+            Member member = memberDao.findByEmailAndPwd(email, MD5Util.md5(password));
+            return member;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            sqlSession.close();
+        }
+    }
+
     public boolean register(Member member) {
         SqlSession sqlSession = null;
         try {
+            boolean existMember = this.isExistMember(member.getNickName(), member.getEmail());
+            if (existMember) return false;
             //1.获取SqlSession
             sqlSession = MapperFactory.getSqlSession();
             //2.获取Dao
@@ -48,4 +64,50 @@ public class MemberServiceImpl implements MemberService {
             }
         }
     }
+
+    public Member findByName(String nickname) {
+        SqlSession sqlSession = null;
+        try {
+            //1.获取SqlSession
+            sqlSession = MapperFactory.getSqlSession();
+            MemberDao memberDao = MapperFactory.getMapper(sqlSession, MemberDao.class);
+            return memberDao.findByName(nickname);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                sqlSession.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Member findByEmail(String email) {
+        SqlSession sqlSession = null;
+        try {
+            //1.获取SqlSession
+            sqlSession = MapperFactory.getSqlSession();
+            MemberDao memberDao = MapperFactory.getMapper(sqlSession, MemberDao.class);
+            return memberDao.findByEmail(email);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                sqlSession.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean isExistMember(String nickname, String email) {
+        Member byName = this.findByName(nickname);
+        Member byEmail = this.findByEmail(email);
+        if (byEmail != null || byName != null) {
+            return true;
+        }
+        return false;
+    }
+
 }

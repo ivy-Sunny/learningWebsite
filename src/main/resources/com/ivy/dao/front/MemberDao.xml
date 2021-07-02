@@ -35,4 +35,16 @@
         from tr_member
         where email = #{email,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
     </select>
+    <select id="findByName" parameterType="String" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from tr_member
+        where nick_name = #{nick_name}
+    </select>
+    <select id="findByEmail" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tr_member
+        where email = #{email}
+    </select>
 </mapper>

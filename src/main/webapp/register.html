@@ -171,7 +171,7 @@
             rules: {//输入框input 验证规则
                 nickname: [
                     { required: true, message: '请输入用户名称', trigger: 'blur' },
-                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                    { min: 3, max: 10, message: '长度在 3 到 5 个字符', trigger: 'blur' }
                 ],
                 password: [
                     { required: true, message: '请输入密码', trigger: 'blur' },
@@ -196,7 +196,7 @@
         },
         methods: {
             checkEmail: function() {
-                var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+                var regEmail = /^[_A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
                 if (this.ruleForm.email != '' && !regEmail.test(this.ruleForm.email)) {
                     this.$message({
                         message: '邮箱格式不正确',
@@ -212,8 +212,10 @@
                         axios.post('/member/register', this.ruleForm).then(function (response) {
                             //得到响应数据
                             var res = response.data;
+                            console.log(res)
                             //判断成功与否
                             if(res.flag){
+                                alert("提示："+res.message);
                                 window.open('/index.html','_self');
                             }else{
                                 alert("提示："+res.message)

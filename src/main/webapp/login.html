@@ -38,112 +38,114 @@
 </header>
 
 <div id="app">
-<div class="wrapper loginsign">
-    <el-container style="height: auto; border: 1px solid #eee">
-    <div class="item">
-        <div class="form">
-        <h3 class="loginsign-title">用户登录</h3>
-        <el-form ref="form" :model="form" label-width="100px">
-            <div class="control-group">
-                <el-form-item label="登录名" class="control-label">
-                    <el-input prefix-icon="el-icon-user" type="text" v-model="member.email" class="input-xlarge"
-                              autocomplete="off"></el-input>
-                </el-form-item>
-            </div>
-            <div class="control-group">
-                <el-form-item label="密码" class="control-label">
-                    <el-input prefix-icon="el-icon-lock" type="password" v-model="member.password" class="input-xlarge"
-                              autocomplete="off"></el-input>
-                </el-form-item>
-            </div>
-            <div class="controls">
-                <el-form-item label="" class="control-label">
-                    <el-checkbox-group v-model="member.remember">
-                        <el-checkbox label="记住登录状态" name="member.remember"></el-checkbox>
-                    </el-checkbox-group>
-                </el-form-item>
-            </div>
-            <div class="controls">
-                <el-form-item>
-                    <el-button @click="onSubmit" class="sui-btn btn-danger btn-yes">登录</el-button>
-                </el-form-item>
-            </div>
-            <div class="other-methods">
-            </div>
-            <!--</form>-->
-        </el-form>
-    </div>
-    </div>
-    </el-container>
-</div>
-
-<div class="footer">
-    <div class="wrapper">
-        <div class="footer-bottom">
-            <div class="link">
-                <dl>
-                    <dt>
-                        网站相关
-                    </dt>
-                    <dd>
-                        关于我们
-                    </dd>
-                    <dd>
-                        服务条款
-                    </dd>
-                    <dd>
-                        帮助中心
-                    </dd>
-                    <dd>
-                        编辑器语法
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        常用链接
-                    </dt>
-                    <dd>
-                        传智播客
-                    </dd>
-                    <dd>
-                        传智论坛
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        联系我们
-                    </dt>
-                    <dd>
-                        联系我们
-                    </dd>
-                    <dd>
-                        加入我们
-                    </dd>
-                    <dd>
-                        建议反馈
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        关注我们
-                    </dt>
-                    <dd>
-                        微博
-                    </dd>
-                    <dd>
-                        twitter
-                    </dd>
-                </dl>
-                <div class="xuke">
-                    <h3>内容许可</h3>
-                    <p>除特别说明外，用户内容均采用知识共享署名-非商业性使用-禁止演绎4.0 国际许可协议 (CC BY-NC-ND 4.0) 进行许可</p>
-                    <p>本站由 传智研究院 提供更新服务</p>
+    <div class="wrapper loginsign">
+        <el-container style="height: auto; border: 1px solid #eee">
+            <div class="item">
+                <div class="form">
+                    <h3 class="loginsign-title">用户登录</h3>
+                    <el-form ref="form" :model="form" label-width="100px">
+                        <div class="control-group">
+                            <el-form-item label="登录名" class="control-label">
+                                <el-input prefix-icon="el-icon-user" type="text" v-model="member.email"
+                                          class="input-xlarge"
+                                          autocomplete="off"></el-input>
+                            </el-form-item>
+                        </div>
+                        <div class="control-group">
+                            <el-form-item label="密码" class="control-label">
+                                <el-input prefix-icon="el-icon-lock" type="password" v-model="member.password"
+                                          class="input-xlarge"
+                                          autocomplete="off"></el-input>
+                            </el-form-item>
+                        </div>
+                        <div class="controls">
+                            <el-form-item label="" class="control-label">
+                                <el-checkbox-group v-model="member.remember">
+                                    <el-checkbox label="记住登录状态" name="member.remember"></el-checkbox>
+                                </el-checkbox-group>
+                            </el-form-item>
+                        </div>
+                        <div class="controls">
+                            <el-form-item>
+                                <el-button @click="onSubmit" class="sui-btn btn-danger btn-yes">登录</el-button>
+                            </el-form-item>
+                        </div>
+                        <div class="other-methods">
+                        </div>
+                        <!--</form>-->
+                    </el-form>
                 </div>
             </div>
-            <p class="Copyright">Copyright &copy; 2017 传智问答社区 当前版本 0.0.1</p>
+        </el-container>
+    </div>
+
+    <div class="footer">
+        <div class="wrapper">
+            <div class="footer-bottom">
+                <div class="link">
+                    <dl>
+                        <dt>
+                            网站相关
+                        </dt>
+                        <dd>
+                            关于我们
+                        </dd>
+                        <dd>
+                            服务条款
+                        </dd>
+                        <dd>
+                            帮助中心
+                        </dd>
+                        <dd>
+                            编辑器语法
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            常用链接
+                        </dt>
+                        <dd>
+                            传智播客
+                        </dd>
+                        <dd>
+                            传智论坛
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            联系我们
+                        </dt>
+                        <dd>
+                            联系我们
+                        </dd>
+                        <dd>
+                            加入我们
+                        </dd>
+                        <dd>
+                            建议反馈
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            关注我们
+                        </dt>
+                        <dd>
+                            微博
+                        </dd>
+                        <dd>
+                            twitter
+                        </dd>
+                    </dl>
+                    <div class="xuke">
+                        <h3>内容许可</h3>
+                        <p>除特别说明外，用户内容均采用知识共享署名-非商业性使用-禁止演绎4.0 国际许可协议 (CC BY-NC-ND 4.0) 进行许可</p>
+                        <p>本站由 传智研究院 提供更新服务</p>
+                    </div>
+                </div>
+                <p class="Copyright">Copyright &copy; 2017 传智问答社区 当前版本 0.0.1</p>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <script>
@@ -159,47 +161,14 @@
             methods: {
                 onSubmit() {
                     axios.post('/member/login', this.member).then(function (response) {
-                        //将登录人信息放到一个指定的位置，然后到index页面中判断这个位置中是否有登录数据
-                        //localStorage基础操作
-                        /*
-                        if(!window.localStorage){
-                            alert("更升级到高版本的浏览器，否则无法正常使用！")
-                        }else{
-                            storage = window.localStorage;
-                            storage.a = 1
-                            storage['b']='2'
-                            storage.setItem('c','3')
-                            storage.removeItem('c')
-                            alert(storage.a)
-                            alert(typeof(storage.a))
-                        }
-                        */
-
-                        /*
-                        //根据返回的结果进行下一步的动作
-                        if( res.flag){
-                            // 跳转页面 index.html
-                            window.open("index.html","_self");
-                        }else{
-                            alert(res.message);
-                        }
-                        */
-
                         //得到响应数据
                         var res = response.data;
-                        //提示登录
-                        // alert(res.message);
-                        // alert(res.data.nickName);
                         //判断成功与否
-                        if(res.flag){
-                            if(!window.localStorage){
-                                alert("更升级到高版本的浏览器，否则无法正常使用！")
-                            }else {
-                                var storage = window.localStorage;
-                                storage.id = res.data.id;
-                                //storage.userName = res.data.nickName;
-                            }
-                            window.open('/index.html','_self');
+                        if (res.flag) {
+                            localStorage.userinfo = res.data.id;
+                            window.open('/index.html', '_self');
+                        } else {
+                            alert(res.message);
                         }
                     }).catch(function (err) {
                         console.log(err)
