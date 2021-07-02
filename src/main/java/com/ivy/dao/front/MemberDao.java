@@ -10,5 +10,7 @@ public interface MemberDao {
 
     Member findByEmail(String email);
 
+    Member findById(String id);
+
     Member findByEmailAndPwd(@Param("email") String email, @Param("password") String password);
 }

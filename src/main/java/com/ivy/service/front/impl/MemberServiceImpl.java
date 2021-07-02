@@ -32,6 +32,20 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+    public Member findById(String id) {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = MapperFactory.getSqlSession();
+            MemberDao memberDao = MapperFactory.getMapper(sqlSession, MemberDao.class);
+            Member member = memberDao.findById(id);
+            return member;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            sqlSession.close();
+        }
+    }
+
     public boolean register(Member member) {
         SqlSession sqlSession = null;
         try {

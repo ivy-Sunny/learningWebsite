@@ -14,28 +14,28 @@
 <body>
 <div id="app">
     <div class="top">
-        <span class="top-right" id="register" style="display: none">
+        <span v-if="!isLogin" class="top-right" id="register">
             <a href="./register.html" style="color:white">注册</a>
         </span>
 
-        <span class="top-right" id="login" style="display: none">
+        <span v-if="!isLogin" class="top-right" id="login">
             <a href="./login.html" style="color:white">登录</a>
         </span>
 
-        <span class="top-right" id="exit" style="display: none">
+        <span v-if="isLogin" class="top-right" id="exit">
             <a href="#" @click="logout()" style="color:white">退出</a>
         </span>
 
-        <span class="top-right" id="myexam" style="display: none">
+        <span v-if="isLogin" class="top-right" id="myexam">
             <a href="./history.html" style="color:white">历史测试</a>
         </span>
 
-        <span class="top-right" id="exam" style="display: none">
+        <span v-if="isLogin" class="top-right" id="exam">
             <a href="./paper.html" style="color:white">开始测试</a>
         </span>
 
-        <span class="top-right" id="nickname" style="display: none">
-            {{nickname}},你好
+        <span v-if="isLogin" class="top-right" id="nickname">
+            {{nickname}}，你好
         </span>
     </div>
 
@@ -157,30 +157,10 @@
             el: '#app',
             data: {
                 nickname: '',
+                isLogin: false,
             },
             methods: {
-                checkLogin() {//什么时候执行?vue对象初始化后
-                    //判断当前用户是否登录了，判断现在是否有登录人的信息
-
-                    /*  状态1：未登录
-                    document.querySelector("#register").style.display = 'block';
-                    document.querySelector("#login").style.display = 'block';
-                    document.querySelector("#myexam").style.display = 'none';
-                    document.querySelector("#exam").style.display = 'none';
-                    document.querySelector("#exit").style.display = 'none';
-                    document.querySelector("#nickname").style.display = 'none';
-                    */
-
-
-                    /*  状态2：已登录
-                    document.querySelector("#register").style.display = 'none';
-                    document.querySelector("#login").style.display = 'none';
-                    document.querySelector("#myexam").style.display = 'block';
-                    document.querySelector("#exam").style.display = 'block';
-                    document.querySelector("#exit").style.display = 'block';
-                    document.querySelector("#nickname").style.display = 'block';
-                    */
-
+                checkLogin() {
                     let _this = this;
                     //从localStorage中获取数据，获取当前保存的用户名，再根据用户名获取后台是否登录的状态
                     if (!window.localStorage) {
@@ -189,43 +169,25 @@
                         //获取localStorage对象
                         let storage = window.localStorage;
                         // alert("id："+storage.id);
-
+                        this.isLogin = false;
                         //测试是否有登录数据，id
                         if (storage.id == undefined) {
                             //如果本地没有用户信息，显示登陆和注册按钮
-                            document.querySelector("#register").style.display = 'block';
-                            document.querySelector("#login").style.display = 'block';
-                            document.querySelector("#myexam").style.display = 'none';
-                            document.querySelector("#exam").style.display = 'none';
-                            document.querySelector("#exit").style.display = 'none';
-                            document.querySelector("#nickname").style.display = 'none';
+                            this.isLogin = false;
                         } else {//如果本地存在用户信息，需要确认服务器是否存在当前用户登录信息（redis中）
                             //发送请求，根据当前id去服务器中查找对应的数据
-                            axios.post('/member/checkLogin', '{"id":"' + storage.id + '"}').then(function (response) {
-                                //alert(response.data.data)
+                            axios.post('/member/checkLogin', {id: storage.id}).then(function (response) {
                                 //获取响应数据
                                 let res = response.data;
-                                //alert("redis服务器中存储的用户名信息  : "+res.data)
                                 //判定本地用户对应是否处于登录状态，处于登录状态的用户具有用户名信息
                                 if (res.data == undefined) {
                                     //如果没有用户名信息，当前用户未登录，显示登陆与注册按钮
-                                    document.querySelector("#register").style.display = 'block';//css选择器
-                                    document.querySelector("#login").style.display = 'block';
-                                    document.querySelector("#myexam").style.display = 'none';
-                                    document.querySelector("#exam").style.display = 'none';
-                                    document.querySelector("#exit").style.display = 'none';
-                                    document.querySelector("#nickname").style.display = 'none';
+                                    _this.isLogin = false;
                                 } else {
                                     //如果具有用户名信息，显示用户答题相关按钮
                                     //设置vue对象nickname属性值
-                                    _this.nickname = res.data;
-                                    document.querySelector("#register").style.display = 'none';
-                                    document.querySelector("#login").style.display = 'none';
-                                    document.querySelector("#myexam").style.display = 'block';
-                                    document.querySelector("#exam").style.display = 'block';
-                                    document.querySelector("#exit").style.display = 'block';
-                                    //显示当前登录用户对应的登录信息组件
-                                    document.querySelector("#nickname").style.display = 'block';
+                                    _this.nickname = res.data.nickName;
+                                    _this.isLogin = true;
                                 }
                             }).catch(function (err) {
                                 console.log(err)
@@ -234,21 +196,9 @@
                     }
                 },
                 logout() {
-                    //1.获取localStorage
-                    let storage = window.localStorage;
-                    //2.发送请求，清除登录状态
-                    axios.post('/member/logout', '{"id":"' + storage.id + '"}').then(function (response) {
-                        //1.获取响应数据
-                        let data = response.data;
-                        //2.提示
-                        alert(data.flag);
-                    }).catch(function (err) {
-                        console.log(err)
-                    });
-                    //3.清理localStorage  点击退出登陆清理,直接关闭浏览器数据依然在
                     window.localStorage.clear();
                     //4.通过调用checkLogin方法重置主页面的右上角显示区域
-                    this.checkLogin();
+                    location.reload();
                 }
             },
             /*
@@ -257,7 +207,7 @@
                 定义逻辑的机会。例如，created 这个钩子在实例被创建之后被调用：
                 也有一些其它的钩子，在实例生命周期的不同阶段调用，如 mounted、 updated 、destroyed 。钩子的 this 指向调用它的 Vue 实例。
             */
-            created() {
+            mounted() {
                 this.checkLogin();
             },
         }

@@ -43,8 +43,13 @@ public class MemberServlet extends BaseServlet {
         if (member != null) {
             resultMap = setResultMap("登录成功", member);
         } else {
-            resultMap = setResultMap("账户名和密码不匹配！");
+            resultMap = setResultMap("用户名或密码错误，请重试！");
         }
         return resultMap;
+    }
+
+    public ResultMap checkLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Member member = getData(req, Member.class);
+        return setResultMap("ok", memberService.findById(member.getId()));
     }
 }
