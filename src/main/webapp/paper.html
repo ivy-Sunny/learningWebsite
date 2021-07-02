@@ -8,15 +8,15 @@
     <!--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
     <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="/css/tt.css">
-    <link rel="stylesheet" type="text/css" href="./plugins/normalize-css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="./plugins/yui/cssgrids-min.css" />
-    <link rel="stylesheet" type="text/css" href="./plugins/sui/sui.min.css" />
-    <link rel="stylesheet" type="text/css" href="./plugins/sui/sui-append.min.css" />
-    <link rel="stylesheet" type="text/css" href="./plugins/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="./css/widget-base.css" />
-    <link rel="stylesheet" type="text/css" href="./css/widget-head-foot.css" />
-    <link rel="stylesheet" type="text/css" href="./plugins/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="./css/page-sj-spit-index.css" />
+    <link rel="stylesheet" type="text/css" href="./plugins/normalize-css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="./plugins/yui/cssgrids-min.css"/>
+    <link rel="stylesheet" type="text/css" href="./plugins/sui/sui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./plugins/sui/sui-append.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./plugins/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/widget-base.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/widget-head-foot.css"/>
+    <link rel="stylesheet" type="text/css" href="./plugins/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/page-sj-spit-index.css"/>
 
     <title>自我测试</title>
     <script src="js/vue.js" type="text/javascript"></script>
@@ -40,11 +40,11 @@
                                     <div class="number">
                                         <div class="border answer">
                                             <p class="usenum"></p>
-                                            <p class="zannum"><strong> 题干</strong> </p>
+                                            <p class="zannum"><strong> 题干</strong></p>
                                         </div>
                                         <hr/>
                                         <div class="border answer">
-                                            <p class="zannum"><strong>选项</strong> </p>
+                                            <p class="zannum"><strong>选项</strong></p>
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                     <div class="other">
                                         <div class="fl date">
                                         <span>
-                                            <el-form-item label="单选题"  v-if="question.type == 1">
+                                            <el-form-item label="单选题" v-if="question.type == 1">
                                                 <el-radio-group v-model="question.id">
                                                     <el-radio v-for="(item,index) in question.questionItemList"
                                                               :key="item.id"
@@ -67,7 +67,7 @@
                                                     </el-radio>
                                                 </el-radio-group>
                                             </el-form-item>
-                                            <el-form-item label="多选题" v-if="question.type == 2" >
+                                            <el-form-item label="多选题" v-if="question.type == 2">
                                                  <el-checkbox v-for="(item,index) in question.questionItemList"
                                                               :key="item.id"
                                                               :label="item.content"
@@ -83,7 +83,8 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                        <ul class="detail-list" v-for="question in questions">
+                            <ul class="detail-list" v-for="question in questions">
+                            </ul>
                         </ul>
                         <el-form-item>
                             <el-button type="primary" @click="submitForm('ruleForm')">交卷</el-button>
@@ -102,9 +103,9 @@
     new Vue({
         el: '#app',
         data: {
-            questions:[],
-            results:[],
-            checked:[],
+            questions: [],
+            results: [],
+            checked: [],
         },
         methods: {
             /*-------------------------单选多选题处理结构    开始-------------------------
@@ -127,18 +128,20 @@
                 多选：加入一个数据，如果之前有这个题目的数据，先删除再添加
                 -------------------------单选多选题处理结构    结束-------------------------*/
 
-            changeResultRadio(item){
+            changeResultRadio(item) {
                 //输出选中信息
                 // alert("当前选项所属题目id："+item.questionId);
                 // alert('当前选项id：'+item.id);
                 // alert("本次操作前数据结果：" + JSON.stringify(this.results))
 
                 //组织数据（要加入到results中的数据）
-                var temp = {"questionId":item.questionId,"answer":item.id};
+                var temp = {"questionId": item.questionId, "answer": item.id};
                 //alert(JSON.stringify(temp))
 
                 //删除当前results中已经存在的本题目对应的数据
-                this.results = this.results.filter(e=>{return e.questionId !== item.questionId})
+                this.results = this.results.filter(e => {
+                    return e.questionId !== item.questionId
+                })
                 //alert("results[操作前]：" + JSON.stringify(this.results))
 
                 //将本次操作的结果加入到results
@@ -146,7 +149,7 @@
                 //alert("results[操作后]：" + JSON.stringify(this.results))
             },
 
-            changeResultCheckBox(item){
+            changeResultCheckBox(item) {
                 /*
                 var s = '11,22,33,44';
                 x = '33'
@@ -163,20 +166,22 @@
                 // alert('当前'+ this.checked);
                 // alert("本次操作前数据结果：" + JSON.stringify(this.results))
 
-                var temp = this.results.find(e=>{return e.questionId === item.questionId})
+                var temp = this.results.find(e => {
+                    return e.questionId === item.questionId
+                })
 
-                if(temp == undefined){
+                if (temp == undefined) {
                     //当前题目从来未作答过
-                    temp = {"questionId":item.questionId,"answer":item.id};
-                }else{
-                    if(this.checked){
+                    temp = {"questionId": item.questionId, "answer": item.id};
+                } else {
+                    if (this.checked) {
                         // 添加该答案
                         temp.answer = temp.answer + "," + item.id;
-                    }else{
+                    } else {
                         //删除该答案
                         var arr = temp.answer.split(",");
                         var index = arr.indexOf(item.id);
-                        arr.splice(index,1);
+                        arr.splice(index, 1);
                         temp.answer = arr.join(",");
                     }
                 }
@@ -186,7 +191,9 @@
                 // alert(JSON.stringify(temp))
 
                 //删除当前results中已经存在的本题目对应的数据
-                this.results = this.results.filter(e=>{return e.questionId !== item.questionId})
+                this.results = this.results.filter(e => {
+                    return e.questionId !== item.questionId
+                })
                 //alert("results[操作前]：" + JSON.stringify(this.results))
 
                 //将本次操作的结果加入到results
@@ -194,57 +201,62 @@
                 //alert("results[操作后]：" + JSON.stringify(this.results))
 
 
-
-
-                var arr ;
-                var temp = this.results.find(e=>{return e.questionId === item.questionId})
-                if(temp == undefined){
-                    temp = {"questionId":item.questionId,"answer":item.id};
-                }else{
-                    if(this.checked){
+                var arr;
+                var temp = this.results.find(e => {
+                    return e.questionId === item.questionId
+                })
+                if (temp == undefined) {
+                    temp = {"questionId": item.questionId, "answer": item.id};
+                } else {
+                    if (this.checked) {
                         temp.answer = temp.answer + "," + item.id;
-                    }else{
+                    } else {
                         arr = temp.answer.split(",");
                         var index = arr.indexOf(item.id);
-                        arr.splice(index,1);
+                        arr.splice(index, 1);
                         temp.answer = arr.join(",");
                     }
                 }
-                this.results = this.results.filter(e=>{return e.questionId !== item.questionId})
-                if(var.length > 0){
+                this.results = this.results.filter(e => {
+                    return e.questionId !== item.questionId
+                })
+                if (temp.length > 0) {
                     this.results.push(temp);
                 }
 
 
-
-                var temp = this.results.find(e=>{return e.questionId === item.questionId})
-                if(temp == undefined){
-                    temp = {"questionId":item.questionId,"answer":item.id};
-                }else{
-                    if(this.checked){
+                var temp = this.results.find(e => {
+                    return e.questionId === item.questionId
+                })
+                if (temp == undefined) {
+                    temp = {"questionId": item.questionId, "answer": item.id};
+                } else {
+                    if (this.checked) {
                         temp.answer = temp.answer + "," + item.id;
-                    }else{
+                    } else {
                         var arr = temp.answer.split(",");
                         var index = arr.indexOf(item.id);
-                        arr.splice(index,1);
+                        arr.splice(index, 1);
                         temp.answer = arr.join(",");
                     }
                 }
-                this.results = this.results.filter(e=>{return e.questionId !== item.questionId})
+                this.results = this.results.filter(e => {
+                    return e.questionId !== item.questionId
+                })
                 this.results.push(temp);
             },
             submitForm(formName) {
-                if(this.results.length != this.questions.length){
+                if (this.results.length != this.questions.length) {
                     alert("请检查题目是否全部选择");
                     return;
-                }else{
-                    if(window.confirm("确定交卷吗？")) {
+                } else {
+                    if (window.confirm("确定交卷吗？")) {
                         //把json数据转成字符串
                         let str = JSON.stringify(this.results);
                         //获取localSotrage
                         let storage = window.localStorage;
                         //发送请求，交卷
-                        axios.post('/exam/applyPaper', '{"memberId":"'+storage.id+'","results":'+str+'}').then(function (response) {
+                        axios.post('/exam/applyPaper', '{"memberId":"' + storage.id + '","results":' + str + '}').then(function (response) {
                             //输出提示信息
                             //alert(response.data.message);
                             //发送完请求，跳转到交卷成功页面
@@ -255,7 +267,7 @@
                     }
                 }
             },
-            findQuestion(){
+            findQuestion() {
                 let _this = this;
                 //4.发送post请求，获取题目信息
                 axios.post('/exam/getPaper').then(function (response) {
@@ -268,7 +280,7 @@
                 });
             }
         },
-        created(){
+        created() {
             this.findQuestion();
         },
     });
